@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingBottom="6dp"
+    android:paddingTop="6dp" >
+
+    <!-- 进度条 -->
+
+    <ProgressBar
+        android:id="@+id/footer_progressbar"
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateDrawable="@drawable/progress_indeterminate_drawable"
+        android:visibility="gone" />
+
+    <!-- 无数据时的提示框 -->
+
+    <TextView
+        android:id="@+id/footer_retry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="6dp"
+        android:text="@string/load_faild"
+        android:textColor="#969696"
+        android:textSize="12sp"
+        android:visibility="gone" />
+
+</LinearLayout>
