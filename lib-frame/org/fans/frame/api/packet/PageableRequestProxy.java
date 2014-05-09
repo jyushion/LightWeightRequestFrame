@@ -89,7 +89,7 @@ public class PageableRequestProxy implements ApiRequest {
 	}
 
 	public void setReachEnd(boolean reachEnd) {
-		reachEnd = true;
+		this.reachEnd = reachEnd;
 	}
 
 	/**
