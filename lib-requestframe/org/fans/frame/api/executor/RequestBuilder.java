@@ -68,13 +68,12 @@ public class RequestBuilder {
 			params = paramsBuilder.getPostParams();
 		}
 		StringRequest request = new StringRequest(method, requestUrl, (Listener<String>) listener, errorListener);
-		request.setParams(params);
 		request.setHeaders(paramsBuilder.getHeaders());
 		request.setBodyContentType(paramsBuilder.getContentType());
+		request.setParams(params);
+		request.setFormHeader(paramsBuilder.getFormHeaders());
 		request.setBody(paramsBuilder.getPostBody());
 		request.setFormFiles(paramsBuilder.getFormFiles());
-		request.setFormHeader(paramsBuilder.getFormHeaders());
-		
 		return request;
 
 	}

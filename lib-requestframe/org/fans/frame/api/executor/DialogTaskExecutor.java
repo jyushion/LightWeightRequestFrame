@@ -8,7 +8,6 @@ import java.util.Map.Entry;
 import org.fans.frame.api.packet.ApiRequest;
 import org.fans.frame.api.packet.ApiResponse;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 

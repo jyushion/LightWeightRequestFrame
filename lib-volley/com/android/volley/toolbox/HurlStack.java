@@ -267,10 +267,10 @@ public class HurlStack implements HttpStack {
 			if (paramsBuffer.length() > 0)
 				contentLength += paramsBuffer.toString().getBytes().length;
 			for (FormFile file : formFiles) {
-				System.out.println("current file length:"+file.getFromFileLength());
+				System.out.println("current file length:" + file.getFromFileLength());
 				contentLength += file.getFromFileLength();
 			}
-			contentLength+= request.getPostFormFileEndline().getBytes().length;
+			contentLength += request.getPostFormFileEndline().getBytes().length;
 			//
 			connection.setRequestProperty("Content-Length", String.valueOf(contentLength));
 			connection.setDoOutput(true);
@@ -291,7 +291,7 @@ public class HurlStack implements HttpStack {
 					}
 					fin.close();
 				}
-				System.out.println("success write one..."+file.getFilePath());
+				// System.out.println("success write one..."+file.getFilePath());
 				out.write(file.getEndLine().getBytes());
 				// out.close();
 			}
@@ -299,7 +299,7 @@ public class HurlStack implements HttpStack {
 			byte[] endData = request.getPostFormFileEndline().getBytes();
 			out.write(endData);
 			out.close();
-			System.out.println("write end...");
+			// System.out.println("write end...");
 		}
 	}
 }

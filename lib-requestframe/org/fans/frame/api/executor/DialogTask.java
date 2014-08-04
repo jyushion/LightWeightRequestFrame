@@ -24,10 +24,8 @@ import org.fans.frame.api.packet.ApiRequest;
 import org.fans.frame.api.packet.ApiResponse;
 
 import android.app.Dialog;
-import android.app.SearchManager.OnCancelListener;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Handler;
 
 import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;

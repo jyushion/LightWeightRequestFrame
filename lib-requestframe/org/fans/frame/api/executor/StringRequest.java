@@ -24,6 +24,7 @@ public class StringRequest extends com.android.volley.toolbox.StringRequest {
 
 	private FormFile[] formFiles;
 	private FormHeader[] formHeader;
+
 	StringRequest(int method, String url, Listener<String> listener, ErrorListener errorListener) {
 		super(method, url, listener, errorListener);
 	}
@@ -70,6 +71,13 @@ public class StringRequest extends com.android.volley.toolbox.StringRequest {
 		return body != null ? body : super.getPostBody();
 	}
 
+	public void addHeadersForPostFormFiles() {
+		// addHeader("Accept",
+		// "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+		// addHeader("Charsert", "UTF-8");
+		addHeader("Content-Type", "multipart/form-data; boundary=" + BOUNDARY);
+	}
+
 	public void setFormFiles(FormFile[] formFiles) {
 		this.formFiles = formFiles;
 	}
@@ -110,6 +118,17 @@ public class StringRequest extends com.android.volley.toolbox.StringRequest {
 		if (headers == null)
 			headers = new HashMap<String, String>();
 		headers.put(key, value);
+	}
+
+	/**
+	 * 添加Header
+	 * 
+	 * @param headers
+	 */
+	public void addHeaders(HashMap<String, String> headers) {
+		if (headers == null)
+			headers = new HashMap<String, String>();
+		this.headers.putAll(headers);
 	}
 
 	public boolean hasHadRequestFailed() {
