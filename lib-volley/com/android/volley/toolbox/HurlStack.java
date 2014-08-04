@@ -267,7 +267,7 @@ public class HurlStack implements HttpStack {
 			if (paramsBuffer.length() > 0)
 				contentLength += paramsBuffer.toString().getBytes().length;
 			for (FormFile file : formFiles) {
-				System.out.println("current file length:" + file.getFromFileLength());
+//				System.out.println("current file length:" + file.getFromFileLength());
 				contentLength += file.getFromFileLength();
 			}
 			contentLength += request.getPostFormFileEndline().getBytes().length;
