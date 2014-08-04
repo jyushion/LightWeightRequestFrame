@@ -17,7 +17,7 @@ import com.google.gson.FieldNamingStrategy;
  * 也可以由每一个继承ApiRequestd的请求分开处理再提供ParamsBuilder继承实例调用
  * 
  * 
- * @author ludq@hyxt.com
+ * @author Ludaiqian
  * 
  */
 public abstract class ParamsBuilder {

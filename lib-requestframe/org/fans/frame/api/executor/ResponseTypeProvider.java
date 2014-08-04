@@ -6,7 +6,7 @@ import java.util.HashMap;
 /**
  * 配置方法对应的响应类型
  * 
- * @author ludq@hyxt.com
+ * @author Ludaiqian
  * 
  */
 public class ResponseTypeProvider {

@@ -5,7 +5,7 @@ import org.fans.frame.adapter.ListAdapter;
 /**
  * 可分页ListView
  * 
- * @author ludq@hyxt.com
+ * @author Ludaiqian
  * 
  */
 public interface LazyLoadListView {

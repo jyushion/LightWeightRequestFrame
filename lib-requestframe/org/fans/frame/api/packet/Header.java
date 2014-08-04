@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * 设置 该属性是否为Header
  * 
- * @author ludq@hyxt.com
+ * @author Ludaiqian
  * 
  */
 @Retention(RetentionPolicy.RUNTIME)

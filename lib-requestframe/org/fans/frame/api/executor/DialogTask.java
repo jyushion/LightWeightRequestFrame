@@ -39,7 +39,7 @@ import com.android.volley.toolbox.Volley;
  * Wrapper around UserTasks &ProgressDialog
  * 
  * @author Lukasz Wisniewski
- * @author ludq@hyxt.com
+ * @author Ludaiqian
  */
 public abstract class DialogTask implements DialogInterface.OnCancelListener{
 

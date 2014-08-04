@@ -5,7 +5,7 @@ import org.fans.frame.api.packet.ApiRequest;
 /**
  * {@link ParamsBuilder}
  * 
- * @author ludq@hyxt.com
+ * @author Ludaiqian
  * 
  */
 public interface ParamsBuilderProvider {

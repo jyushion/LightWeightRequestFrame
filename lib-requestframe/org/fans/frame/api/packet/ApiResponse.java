@@ -4,7 +4,7 @@ package org.fans.frame.api.packet;
  * 对返回接口的抽象，没有任何字段，所以不会和任何服务端接口耦合， <br>
  * 虽然服务器返回的接口字段不同，但大致方法归类如下
  * 
- * @author ludq@hyxt.com
+ * @author Ludaiqian
  * 
  * @param <Result>
  */

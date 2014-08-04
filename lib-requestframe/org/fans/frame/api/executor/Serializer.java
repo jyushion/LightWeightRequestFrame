@@ -8,7 +8,7 @@ import org.fans.frame.api.packet.ApiResponse;
 /**
  * 序列化转换器
  * 
- * @author ludq@hyxt.com
+ * @author Ludaiqian
  * 
  */
 public interface Serializer {

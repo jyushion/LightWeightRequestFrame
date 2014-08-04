@@ -12,7 +12,7 @@ import com.android.volley.Response.Listener;
 /**
  * 根据给定{@link ApiRequest} 构建一个{@link Request}
  * 
- * @author ludq@hyxt.com
+ * @author Ludaiqian
  * 
  */
 public class RequestBuilder {

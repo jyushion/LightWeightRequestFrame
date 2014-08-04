@@ -11,7 +11,7 @@ import com.android.volley.VolleyError;
 /**
  * 扩展{@link com.android.volley.toolbox.StringRequest} 增强对Post等方式的支持
  * 
- * @author ludq@hyxt.com
+ * @author Ludaiqian
  * 
  */
 public class StringRequest extends com.android.volley.toolbox.StringRequest {

@@ -3,7 +3,7 @@ package org.fans.frame.api.packet;
 /**
  * 返回可分页的数据若存在标志，使用可分页的PageableResponse更为恰当
  * 
- * @author ludq@hyxt.com
+ * @author Ludaiqian
  * 
  * @param <T>
  */
