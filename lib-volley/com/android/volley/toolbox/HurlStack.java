@@ -211,7 +211,8 @@ public class HurlStack implements HttpStack {
 				out.write(postBody);
 				out.close();
 			} else {
-				addFormFilesIfExist(connection, request);
+				connection.setRequestMethod("POST");
+				setFormFilesIfExist(connection, request);
 			}
 			break;
 		case Method.GET:
@@ -225,7 +226,17 @@ public class HurlStack implements HttpStack {
 			break;
 		case Method.POST:
 			connection.setRequestMethod("POST");
-			addBodyIfExists(connection, request);
+			byte[] body = request.getBody();
+			if (body != null) {
+				connection.setDoOutput(true);
+				connection.addRequestProperty(HEADER_CONTENT_TYPE, request.getBodyContentType());
+				DataOutputStream out = new DataOutputStream(connection.getOutputStream());
+				out.write(body);
+				out.close();
+			} 
+			else {
+				setFormFilesIfExist(connection, request);
+			}
 			break;
 		case Method.PUT:
 			connection.setRequestMethod("PUT");
@@ -244,12 +255,10 @@ public class HurlStack implements HttpStack {
 			DataOutputStream out = new DataOutputStream(connection.getOutputStream());
 			out.write(body);
 			out.close();
-		} else {
-			addFormFilesIfExist(connection, request);
-		}
+		} 
 	}
 
-	private static void addFormFilesIfExist(HttpURLConnection connection, Request<?> request) throws IOException,
+	private static void setFormFilesIfExist(HttpURLConnection connection, Request<?> request) throws IOException,
 			FileNotFoundException {
 		FormFile[] formFiles = request.getPostFormFiles();
 		if (formFiles != null && formFiles.length > 0) {
@@ -267,7 +276,8 @@ public class HurlStack implements HttpStack {
 			if (paramsBuffer.length() > 0)
 				contentLength += paramsBuffer.toString().getBytes().length;
 			for (FormFile file : formFiles) {
-//				System.out.println("current file length:" + file.getFromFileLength());
+				// System.out.println("current file length:" +
+				// file.getFromFileLength());
 				contentLength += file.getFromFileLength();
 			}
 			contentLength += request.getPostFormFileEndline().getBytes().length;

@@ -383,7 +383,7 @@ public abstract class Request<T> implements Comparable<Request<T>> {
 		return null;
 	}
 
-	public final static String BOUNDARY ="------WebKitFormBoundary8DZq9b6Fv7PiWVJy"; // 定义数据分隔线
+	public final static String BOUNDARY = "------WebKitFormBoundary8DZq9b6Fv7PiWVJy"; // 定义数据分隔线
 
 	// public HashMap<String, String> getPostFormParams() {
 	// return null;
@@ -400,13 +400,15 @@ public abstract class Request<T> implements Comparable<Request<T>> {
 	public FormHeader[] getPostFormFileHeaders() {
 		return null;
 	}
-	
-	public String getPostFormFileContentType(){
+
+	public String getPostFormFileContentType() {
 		return "multipart/form-data" + "; boundary=" + getBoundary();
 	}
+
 	public String getPostFormFileEndline() {
-		return "--" +getBoundary() + "--\r\n";
+		return "--" + getBoundary() + "--\r\n";
 	}
+
 	/**
 	 * Returns a Map of parameters to be used for a POST or PUT request. Can
 	 * throw {@link AuthFailureError} as authentication may be required to
@@ -672,39 +674,44 @@ public abstract class Request<T> implements Comparable<Request<T>> {
 		/**
 		 * 表单名称
 		 */
-		private String formName;
+		private String formName = "upfile";
 
 		/**
 		 * 文件IO流类型
 		 */
-//		private String contentType = "application/octet-stream";
-		private String contentType = "image/png";
+		// private String contentType = "application/octet-stream";
+		private String mimeType = "image/png";
 
 		private String path;
 
-		public FormFile(String fileName, byte[] data, String formName) {
+		public FormFile(String fileName, byte[] data) {
 			this.data = data;
 			this.fileName = fileName;
-			this.formName = formName;
 		}
 
-		public FormFile(String fileName, String path, String formName) {
+		public FormFile(String fileName, String path) {
 			super();
 			this.fileName = fileName;
 			this.path = path;
-			this.formName = formName;
 		}
 
 		public String getFilePath() {
 			return path;
 		}
 
-		public void setFilePath(String path) {
+		public FormFile setFilePath(String path) {
 			this.path = path;
+			return this;
 		}
 
-		public String getContentType() {
-			return contentType;
+
+		public FormFile setMimeType(String mimeType) {
+			this.mimeType = mimeType;
+			return this;
+		}
+
+		public String getMimeType() {
+			return mimeType;
 		}
 
 		public byte[] getData() {
@@ -719,8 +726,8 @@ public abstract class Request<T> implements Comparable<Request<T>> {
 			return formName;
 		}
 
-		public FormFile setContentType(String contentType) {
-			this.contentType = contentType;
+		public FormFile setContentType(String mimeType) {
+			this.mimeType = mimeType;
 			return this;
 		}
 
@@ -745,11 +752,12 @@ public abstract class Request<T> implements Comparable<Request<T>> {
 			buffer.append(BOUNDARY);
 			buffer.append("\r\n");
 			buffer.append("Content-Disposition: form-data;name=\"" + getFormName() + "\";filename=\"" + getFileName() + "\"\r\n");
-			buffer.append("Content-Type: " + getContentType() + "\r\n\r\n");
-			
-//			buffer.append("Content-Disposition: form-data;name=\"upload" + "\";filename=\"" + "avatar_image.jpg" + "\"\r\n");
+			buffer.append("Content-Type: " + getMimeType() + "\r\n\r\n");
+
+			// buffer.append("Content-Disposition: form-data;name=\"upload" +
+			// "\";filename=\"" + "avatar_image.jpg" + "\"\r\n");
 			// buffer.append("Content-Type:application/octet-stream\r\n\r\n");
-//			buffer.append("Content-Type: image/png\r\n\r\n");
+			// buffer.append("Content-Type: image/png\r\n\r\n");
 			return buffer.toString();
 		}
 
@@ -774,12 +782,10 @@ public abstract class Request<T> implements Comparable<Request<T>> {
 		@Override
 		public String toString() {
 			return "FormFile [data=" + Arrays.toString(data) + ", fileName=" + fileName + ", formName=" + formName
-					+ ", contentType=" + contentType + ", path=" + path + "]";
+					+ ", contentType=" + mimeType + ", path=" + path + "]";
 		}
 
 	}
-
-
 
 	// public byte[] readFile(String path) throws IOException {
 	// FileInputStream fin = new FileInputStream(path);
