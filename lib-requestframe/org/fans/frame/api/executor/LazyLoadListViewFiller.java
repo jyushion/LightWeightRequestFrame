@@ -38,7 +38,13 @@ public class LazyLoadListViewFiller implements AsyncListViewFiller, TaskResultPi
 	private CollectionFetcher fetcher;
 	private DialogTaskExecutor executor = DialogTaskExecutor.DEFAULT_TASK_EXECUTOR;
 	private String faildMsg;
-	private boolean showLoadingDialogIfEmpty;
+	private boolean displayLoadingDialog = false;
+	private int fillStrategy = FillStrategy.APPEND;
+
+	public interface FillStrategy {
+		public static final int APPEND = 0;
+		public static final int REPLACE = 1;
+	}
 
 	public LazyLoadListViewFiller(Context context, PageableRequest request, LazyLoadListView listView) {
 		mContext = context;
@@ -60,6 +66,20 @@ public class LazyLoadListViewFiller implements AsyncListViewFiller, TaskResultPi
 		});
 	}
 
+	/**
+	 * {@link FillStrategy#APPEND}<br>
+	 * {@link FillStrategy#REPLACE}
+	 * 
+	 * @param fillStrategy
+	 */
+	public void setFillStrategy(int fillStrategy) {
+		this.fillStrategy = fillStrategy;
+	}
+
+	public void setDisplayLoadingDialog(boolean displayLoadingDialog) {
+		this.displayLoadingDialog = displayLoadingDialog;
+	}
+
 	public void setFaildMsg(String faildMsg) {
 		this.faildMsg = faildMsg;
 	}
@@ -75,7 +95,7 @@ public class LazyLoadListViewFiller implements AsyncListViewFiller, TaskResultPi
 	private void executeTask() {
 		// System.out.println(mRequestProxy);
 		// System.out.println(mRequestProxy.getRequest());
-		executor.execute(mContext, showLoadingDialogIfEmpty?isEmpty():false, this, mRequestProxy.getRequest());
+		executor.execute(mContext, displayLoadingDialog ? isEmpty() : false, this, mRequestProxy.getRequest());
 
 	}
 
@@ -86,6 +106,7 @@ public class LazyLoadListViewFiller implements AsyncListViewFiller, TaskResultPi
 		} else {
 			mListView.onAllFooterRefreshComplete();
 		}
+
 	}
 
 	public boolean isEmpty() {
@@ -116,7 +137,9 @@ public class LazyLoadListViewFiller implements AsyncListViewFiller, TaskResultPi
 	public void setRequest(PageableRequest request) {
 		mRequestProxy.setRequest(request);
 	}
-
+	public PageableRequestProxy getRequestProxy() {
+		return mRequestProxy;
+	}
 	public PageableRequest getRequest() {
 		return mRequestProxy.getRequest();
 	}
@@ -124,7 +147,6 @@ public class LazyLoadListViewFiller implements AsyncListViewFiller, TaskResultPi
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doStuffWithResult(ApiRequest request, ApiResponse<?> result) {
-		// System.out.println("result:" + result);
 		Collection<?> collection = null;
 		if (fetcher != null) {
 			collection = fetcher.fetch(result);
@@ -142,9 +164,10 @@ public class LazyLoadListViewFiller implements AsyncListViewFiller, TaskResultPi
 		}
 		// 当成功返回且数据内容为空，则判定为加载完毕。
 		boolean reachEnd = collection == null || collection.size() == 0;
-		mRequestProxy.setReachEnd(reachEnd);
-		// if (mRequestProxy.getCurrentPage() == 1)
-		// mAdapter.clear();
+		if (reachEnd)
+			mRequestProxy.setReachEnd(reachEnd);
+		if (mRequestProxy.getCurrentPage() == 1 && fillStrategy == FillStrategy.REPLACE&&!reachEnd)
+			mAdapter.clear();
 		if (collection != null)
 			mAdapter.addAll(collection);
 		// Log.i(TAG, "successful add all.......");
@@ -172,10 +195,4 @@ public class LazyLoadListViewFiller implements AsyncListViewFiller, TaskResultPi
 		PageableRequest currentRequest = (PageableRequest) request;
 		mListView.onLoadingFailed(currentRequest.getCurrentPage());
 	}
-
-	public void setShowLoadingDialogIfEmpty(boolean showLoadingDialogIfEmpty) {
-		this.showLoadingDialogIfEmpty = showLoadingDialogIfEmpty;
-	}
-	
-	
 }

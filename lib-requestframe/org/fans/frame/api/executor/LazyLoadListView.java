@@ -15,7 +15,7 @@ public interface LazyLoadListView {
 	public void onFooterRefreshComplete();
 
 	public void onAllFooterRefreshComplete();
-
+	
 	public void onLoadingFailed(int faildPage);
 
 	public ListAdapter<?> getListAdapter();

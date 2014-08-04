@@ -85,7 +85,11 @@ public class PageableRequestProxy implements ApiRequest {
 		// ", pageCount:" + pageCount);
 		if (reachEnd)
 			return false;
-		return !pageCountSet || request.getCurrentPage() <= pageCount;
+		System.out.println("pageCount set?"+pageCountSet+", current page:"+request.getCurrentPage()+", pageCount:"+pageCount);
+		
+		System.out.println("<?"+(request.getCurrentPage() <= pageCount));
+		System.out.println("has next?"+(!pageCountSet ||request.getCurrentPage() <= pageCount));
+		return !pageCountSet ||request.getCurrentPage() <= pageCount;
 	}
 
 	public void setReachEnd(boolean reachEnd) {

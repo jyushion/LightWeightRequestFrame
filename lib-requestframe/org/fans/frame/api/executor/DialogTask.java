@@ -24,9 +24,9 @@ import org.fans.frame.api.packet.ApiRequest;
 import org.fans.frame.api.packet.ApiResponse;
 
 import android.app.Dialog;
+import android.app.SearchManager.OnCancelListener;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
 import android.os.Handler;
 
 import com.android.volley.Request.Method;
@@ -43,7 +43,7 @@ import com.android.volley.toolbox.Volley;
  * @author Lukasz Wisniewski
  * @author ludq@hyxt.com
  */
-public abstract class DialogTask implements OnCancelListener {
+public abstract class DialogTask implements DialogInterface.OnCancelListener{
 
 	private Dialog mProgressDialog;
 	protected Context mContext;
@@ -61,9 +61,10 @@ public abstract class DialogTask implements OnCancelListener {
 		this.mContext = context;
 		if (DEFAULT_QUEUE == null) {
 			DEFAULT_QUEUE = Volley.newRequestQueue(context.getApplicationContext());
+		}else{	
+			DEFAULT_QUEUE.start();
 		}
 		requestQueue = DEFAULT_QUEUE;
-		requestQueue.start();
 		runningRequests = new ArrayList<StringRequest>();
 	}
 
@@ -92,12 +93,13 @@ public abstract class DialogTask implements OnCancelListener {
 			// --------
 			if (mProgressDialog != null) {
 				mProgressDialog.setCanceledOnTouchOutside(false);
-				mProgressDialog.setOnCancelListener(this);
+			
 				mProgressDialog.show();
+				mProgressDialog.setOnCancelListener(this);
 			}
 		}
 	}
-
+	
 	public void execute(ApiRequest... requests) {
 		onPreExecute();
 		for (final ApiRequest apiRequest : requests) {
@@ -112,6 +114,7 @@ public abstract class DialogTask implements OnCancelListener {
 				@Override
 				public void onResponse(String response) {
 					Type clazz = ResponseTypeProvider.getInstance().getApiResponseType(apiRequest.getMethod());
+					System.out.println("result:"+response);
 					final ApiResponse<?> apiResponse = serializer != null ? serializer.deserialize(response, clazz)
 							: JsonSerializer.DEFAULT.deserialize(response, clazz);
 					onProcessing(apiRequest, apiResponse);
@@ -226,9 +229,9 @@ public abstract class DialogTask implements OnCancelListener {
 	public void setMethod(int method) {
 		this.method = method;
 	}
-
+	
 	@Override
 	public void onCancel(DialogInterface dialog) {
-		requestQueue.stop();
+		cancel();
 	}
 }

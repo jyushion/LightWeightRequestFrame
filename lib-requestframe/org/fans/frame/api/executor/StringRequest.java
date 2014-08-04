@@ -20,7 +20,10 @@ public class StringRequest extends com.android.volley.toolbox.StringRequest {
 	private boolean requestFailed = false;
 
 	private byte[] body;
+	private String bodyContentType;
 
+	private FormFile[] formFiles;
+	private FormHeader[] formHeader;
 	StringRequest(int method, String url, Listener<String> listener, ErrorListener errorListener) {
 		super(method, url, listener, errorListener);
 	}
@@ -43,6 +46,16 @@ public class StringRequest extends com.android.volley.toolbox.StringRequest {
 		return params;
 	}
 
+	public void setBodyContentType(String bodyContentType) {
+		this.bodyContentType = bodyContentType;
+	}
+
+	// return getBodyContentType();
+	@Override
+	public String getBodyContentType() {
+		return bodyContentType != null ? bodyContentType : super.getBodyContentType();
+	}
+
 	public void setBody(byte[] body) {
 		this.body = body;
 	}
@@ -55,6 +68,24 @@ public class StringRequest extends com.android.volley.toolbox.StringRequest {
 	@Override
 	public byte[] getPostBody() throws AuthFailureError {
 		return body != null ? body : super.getPostBody();
+	}
+
+	public void setFormFiles(FormFile[] formFiles) {
+		this.formFiles = formFiles;
+	}
+
+	public void setFormHeader(FormHeader[] formHeader) {
+		this.formHeader = formHeader;
+	}
+
+	@Override
+	public FormFile[] getPostFormFiles() {
+		return formFiles != null ? formFiles : super.getPostFormFiles();
+	}
+
+	@Override
+	public FormHeader[] getPostFormFileHeaders() {
+		return formHeader != null ? formHeader : super.getPostFormFileHeaders();
 	}
 
 	/**
@@ -101,8 +132,8 @@ public class StringRequest extends com.android.volley.toolbox.StringRequest {
 
 	@Override
 	public void deliverError(VolleyError error) {
-		super.deliverError(error);
 		markFailed();
+		super.deliverError(error);
 	}
 
 	public void markFailed() {

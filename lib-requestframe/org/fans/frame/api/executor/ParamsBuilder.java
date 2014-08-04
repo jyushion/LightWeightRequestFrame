@@ -6,6 +6,8 @@ import java.util.HashMap;
 import org.fans.frame.api.packet.ApiRequest;
 import org.fans.frame.api.packet.Name;
 
+import com.android.volley.Request.FormFile;
+import com.android.volley.Request.FormHeader;
 import com.google.gson.FieldNamingStrategy;
 
 /**
@@ -93,6 +95,24 @@ public abstract class ParamsBuilder {
 	 * @return
 	 */
 	public byte[] getPostBody() {
+		return null;
+	}
+
+	public FormHeader[] getFormHeaders(){
+		return null;
+		
+	}
+	
+	public FormFile[] getFormFiles(){
+		return null;
+		
+	}
+	
+	public int getType() {
+		return 0;
+	}
+	
+	public String getContentType(){
 		return null;
 	}
 

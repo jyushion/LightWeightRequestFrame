@@ -10,6 +10,7 @@ import org.fans.frame.api.packet.ApiResponse;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 
 import com.android.volley.Request.Method;
 import com.android.volley.VolleyError;
@@ -21,7 +22,6 @@ public class DialogTaskExecutor {
 	private ParamsBuilderProvider paramsBuildersProvider;
 	public static final DialogTaskExecutor DEFAULT_TASK_EXECUTOR = new DialogTaskExecutor();
 	private KeyGenerator keyGenerator;
-	private boolean responseOnUIThread = true;
 	private Serializer serializer;
 	private DialogProvider dialogProvider;
 	private String url;
@@ -49,8 +49,6 @@ public class DialogTaskExecutor {
 	 *            key生成器
 	 * @param loadingDialog
 	 *            加载条
-	 * @param responseOnUIThread
-	 *            是否在UI线程返回数据
 	 * @return
 	 */
 	public DialogTaskExecutor config(String url, int method, Serializer serializer, ParamsBuilderProvider paramsBuildersProvider,
@@ -101,6 +99,7 @@ public class DialogTaskExecutor {
 						}
 						resultPicker.onRequestFailed(request, result.getMessage(), error);
 					}
+
 				}
 
 				@Override
@@ -108,7 +107,10 @@ public class DialogTaskExecutor {
 					super.onRequestFailed(request, reason, error);
 					resultPicker.onRequestFailed(request, reason, error);
 				}
-
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					super.onCancel(dialog);
+				}
 				@Override
 				protected void onFinishExecuted() {
 					super.onFinishExecuted();
