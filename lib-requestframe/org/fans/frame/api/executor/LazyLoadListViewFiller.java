@@ -137,9 +137,11 @@ public class LazyLoadListViewFiller implements AsyncListViewFiller, TaskResultPi
 	public void setRequest(PageableRequest request) {
 		mRequestProxy.setRequest(request);
 	}
+
 	public PageableRequestProxy getRequestProxy() {
 		return mRequestProxy;
 	}
+
 	public PageableRequest getRequest() {
 		return mRequestProxy.getRequest();
 	}
@@ -166,7 +168,7 @@ public class LazyLoadListViewFiller implements AsyncListViewFiller, TaskResultPi
 		boolean reachEnd = collection == null || collection.size() == 0;
 		if (reachEnd)
 			mRequestProxy.setReachEnd(reachEnd);
-		if (mRequestProxy.getCurrentPage() == 1 && fillStrategy == FillStrategy.REPLACE&&!reachEnd)
+		if (mRequestProxy.getCurrentPage() == 1 && fillStrategy == FillStrategy.REPLACE && !reachEnd)
 			mAdapter.clear();
 		if (collection != null)
 			mAdapter.addAll(collection);
