@@ -3,6 +3,12 @@ package org.fans.frame.api.executor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
+/**
+ * 对Field的过滤
+ * 
+ * @author daiqian
+ * @since 1.0
+ */
 public final class PacketFieldExcluder {
 	public static final PacketFieldExcluder DEFAULT = new PacketFieldExcluder();
 

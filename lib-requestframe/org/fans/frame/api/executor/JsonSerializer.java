@@ -9,6 +9,12 @@ import com.google.gson.FieldNamingStrategy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+/**
+ * json解析器
+ * 
+ * @author Ludaiqian
+ * @since 1.0
+ */
 public class JsonSerializer implements Serializer {
 	public Gson gson;
 
@@ -29,6 +35,5 @@ public class JsonSerializer implements Serializer {
 		return gson.fromJson(json, type);
 
 	}
-
 
 }

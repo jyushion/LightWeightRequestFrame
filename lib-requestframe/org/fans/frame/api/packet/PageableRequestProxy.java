@@ -6,7 +6,7 @@ package org.fans.frame.api.packet;
  * 分页参数的设置
  * 
  * @author LuDaiqian
- * 
+ * @since 1.0
  */
 public class PageableRequestProxy implements ApiRequest {
 

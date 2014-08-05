@@ -4,6 +4,12 @@ import com.android.volley.VolleyError;
 
 import org.fans.frame.api.packet.Error;
 
+/**
+ * 服务器返回错误信息的封装
+ * 
+ * @author Ludaiqian
+ * @since 1.0
+ */
 public class ResponseError extends VolleyError {
 
 	/**

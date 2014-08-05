@@ -4,7 +4,7 @@ package org.fans.frame.api.executor;
  * 对一个ListView行异步填充,在填充之前，必须保证已经完成对 Adapter的配置
  * 
  * @author LuDaiqian
- * 
+ * @since 1.0
  */
 public interface AsyncListViewFiller {
 

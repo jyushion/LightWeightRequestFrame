@@ -23,7 +23,7 @@ import com.android.volley.VolleyError;
  * 
  * 
  * @author LuDaiqian
- * 
+ * @since 1.0
  */
 public class LazyLoadListViewFiller implements AsyncListViewFiller, TaskResultPicker {
 

@@ -9,10 +9,10 @@ import org.fans.frame.api.packet.ApiResponse;
  * 序列化转换器
  * 
  * @author Ludaiqian
- * 
+ * @since 1.0
  */
 public interface Serializer {
-	
+
 	/**
 	 * 序列化
 	 * 

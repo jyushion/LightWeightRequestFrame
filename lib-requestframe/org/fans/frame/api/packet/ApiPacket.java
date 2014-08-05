@@ -1,6 +1,10 @@
 package org.fans.frame.api.packet;
 
-public  interface ApiPacket {
-	
-	
+/**
+ * 
+ * @author Ludaiqian
+ * @since 1.0
+ */
+public interface ApiPacket {
+
 }

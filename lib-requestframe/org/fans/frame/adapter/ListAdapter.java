@@ -13,6 +13,13 @@ import android.widget.AbsListView.RecyclerListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
+/**
+ * 基础Adapter
+ * @author Ludaiqian
+ * @since 1.0
+ * 
+ * @param <T>
+ */
 public abstract class ListAdapter<T> extends BaseAdapter implements RecyclerListener, OnScrollListener {
 
 	protected List<T> mList;
@@ -98,7 +105,7 @@ public abstract class ListAdapter<T> extends BaseAdapter implements RecyclerList
 
 	@Override
 	public void onMovedToScrapHeap(View view) {
-
+		// 必要时回收资源
 	}
 
 	public void clear() {
@@ -109,6 +116,5 @@ public abstract class ListAdapter<T> extends BaseAdapter implements RecyclerList
 	public Context getContext() {
 		return mContext;
 	}
-
 
 }

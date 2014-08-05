@@ -5,7 +5,12 @@ import java.util.HashMap;
 
 import org.fans.frame.api.packet.ApiRequest;
 import org.fans.frame.api.packet.Header;
-
+/**
+ * 默认的ParamsBuilder
+ * @author Ludaiqian
+ * @since 1.0
+ *
+ */
 public class DefaultParamsBuilder extends ParamsBuilder {
 	private PacketFieldExcluder excluder = PacketFieldExcluder.DEFAULT;
 

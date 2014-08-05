@@ -40,8 +40,9 @@ import com.android.volley.toolbox.Volley;
  * 
  * @author Lukasz Wisniewski
  * @author Ludaiqian
+ * @since 1.0
  */
-public abstract class DialogTask implements DialogInterface.OnCancelListener{
+public abstract class DialogTask implements DialogInterface.OnCancelListener {
 
 	private Dialog mProgressDialog;
 	protected Context mContext;
@@ -59,7 +60,7 @@ public abstract class DialogTask implements DialogInterface.OnCancelListener{
 		this.mContext = context;
 		if (DEFAULT_QUEUE == null) {
 			DEFAULT_QUEUE = Volley.newRequestQueue(context.getApplicationContext());
-		}else{	
+		} else {
 			DEFAULT_QUEUE.start();
 		}
 		requestQueue = DEFAULT_QUEUE;
@@ -91,13 +92,13 @@ public abstract class DialogTask implements DialogInterface.OnCancelListener{
 			// --------
 			if (mProgressDialog != null) {
 				mProgressDialog.setCanceledOnTouchOutside(false);
-			
+
 				mProgressDialog.show();
 				mProgressDialog.setOnCancelListener(this);
 			}
 		}
 	}
-	
+
 	public void execute(ApiRequest... requests) {
 		onPreExecute();
 		for (final ApiRequest apiRequest : requests) {
@@ -112,7 +113,7 @@ public abstract class DialogTask implements DialogInterface.OnCancelListener{
 				@Override
 				public void onResponse(String response) {
 					Type clazz = ResponseTypeProvider.getInstance().getApiResponseType(apiRequest.getMethod());
-					System.out.println("result:"+response);
+					System.out.println("result:" + response);
 					final ApiResponse<?> apiResponse = serializer != null ? serializer.deserialize(response, clazz)
 							: JsonSerializer.DEFAULT.deserialize(response, clazz);
 					onProcessing(apiRequest, apiResponse);
@@ -227,7 +228,7 @@ public abstract class DialogTask implements DialogInterface.OnCancelListener{
 	public void setMethod(int method) {
 		this.method = method;
 	}
-	
+
 	@Override
 	public void onCancel(DialogInterface dialog) {
 		cancel();

@@ -14,6 +14,12 @@ import android.content.DialogInterface;
 import com.android.volley.Request.Method;
 import com.android.volley.VolleyError;
 
+/**
+ * 提供对异步任务的配置，执行及回调。
+ * 
+ * @author Ludaiqian
+ * @since 1.0
+ */
 public class DialogTaskExecutor {
 
 	// private DialogTask task;
@@ -106,10 +112,12 @@ public class DialogTaskExecutor {
 					super.onRequestFailed(request, reason, error);
 					resultPicker.onRequestFailed(request, reason, error);
 				}
+
 				@Override
 				public void onCancel(DialogInterface dialog) {
 					super.onCancel(dialog);
 				}
+
 				@Override
 				protected void onFinishExecuted() {
 					super.onFinishExecuted();

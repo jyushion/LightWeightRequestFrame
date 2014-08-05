@@ -7,6 +7,7 @@ package org.fans.frame.api.packet;
  * @author Ludaiqian
  * 
  * @param <Result>
+ * @since 1.0
  */
 public interface ApiResponse<Result> extends ApiPacket {
 	/**

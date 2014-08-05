@@ -19,7 +19,7 @@ import com.android.volley.VolleyError;
  * 对一个可分页的ListView进行异步填充,在填充之前，必须保证已经完成对 Adapter的配置
  * 
  * @author LuDaiqian
- * 
+ * @since 1.0
  */
 public class AsyncListViewFillerImpl implements AsyncListViewFiller, TaskResultPicker {
 

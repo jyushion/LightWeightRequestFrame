@@ -13,12 +13,12 @@ import com.google.gson.FieldNamingStrategy;
 /**
  * 根据ApiPacket生成GET方式的url或者提取Http协议请求头或参数，<br>
  * 生成或提取方式可以由使用者根据接口实际情况来决定 ,<br>
- * 绝大多数情况下，可以由ParamsBuilder继承实例类统一处理，当然，<br>
- * 也可以由每一个继承ApiRequestd的请求分开处理再提供ParamsBuilder继承实例调用
+ * 绝大多数情况下，对ApiPacket的序列化可以由ParamsBuilder继承实例类统一处理，当然，<br>
+ * 也可以分别由ApiRequest实例的请求分开处理,再提供ParamsBuilder继承实例调用
  * 
  * 
  * @author Ludaiqian
- * 
+ * @since 1.0
  */
 public abstract class ParamsBuilder {
 	protected String url;
@@ -89,7 +89,8 @@ public abstract class ParamsBuilder {
 
 	/**
 	 * 不通过key-value方式， 需要提交二进制到服务器的情况下下，可以重写此方法,<br>
-	 * 返回非<code>null</code>的情况下，设置任何Post参数都将会无效,即{@link #getPostParams()}是无意义的
+	 * 返回非<code>null</code>的情况下，设置任何Post参数或者FormFile都将会无效,即
+	 * {@link #getPostParams()}和{@link #getFormFiles()}返回是无意义的。
 	 * 
 	 * @see RequestBuilder#build()
 	 * @return
@@ -98,21 +99,22 @@ public abstract class ParamsBuilder {
 		return null;
 	}
 
-	public FormHeader[] getFormHeaders(){
+	public FormHeader[] getFormHeaders() {
 		return null;
-		
+
 	}
-	
-	public FormFile[] getFormFiles(){
+
+	/**
+	 * 返回需要上传的文件，在 {@link #getPostBody()}为<code>null</code>时有意义。
+	 * 
+	 * @return
+	 */
+	public FormFile[] getFormFiles() {
 		return null;
-		
+
 	}
-	
-	public int getType() {
-		return 0;
-	}
-	
-	public String getContentType(){
+
+	public String getContentType() {
 		return null;
 	}
 

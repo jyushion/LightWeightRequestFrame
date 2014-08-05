@@ -6,7 +6,7 @@ import org.fans.frame.adapter.ListAdapter;
  * 可分页ListView
  * 
  * @author Ludaiqian
- * 
+ * @since1.0
  */
 public interface LazyLoadListView {
 
@@ -15,7 +15,7 @@ public interface LazyLoadListView {
 	public void onFooterRefreshComplete();
 
 	public void onAllFooterRefreshComplete();
-	
+
 	public void onLoadingFailed(int faildPage);
 
 	public ListAdapter<?> getListAdapter();

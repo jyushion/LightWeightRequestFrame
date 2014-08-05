@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
  * 设置 该属性是否为Header
  * 
  * @author Ludaiqian
- * 
+ * @since 1.0
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)

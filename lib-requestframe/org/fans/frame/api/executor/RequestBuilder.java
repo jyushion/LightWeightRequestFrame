@@ -13,7 +13,7 @@ import com.android.volley.Response.Listener;
  * 根据给定{@link ApiRequest} 构建一个{@link Request}
  * 
  * @author Ludaiqian
- * 
+ * @since 1.0
  */
 public class RequestBuilder {
 	private String url;
