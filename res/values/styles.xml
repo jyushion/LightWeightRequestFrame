@@ -30,47 +30,52 @@
         <item name="android:gravity">center</item>
     </style>
     <!-- Large Text Style -->
-    <style name="LargeText" parent="TextTheme">
+    <style name="TextAppearance.Large" parent="TextTheme">
         <item name="android:textSize">22sp</item>
         <item name="android:singleLine">true</item>
     </style>
     <!-- Title Text Style -->
-    <style name="TitleText" parent="TextTheme">
+    <style name="TextAppearance.Title" parent="TextTheme">
         <item name="android:textSize">20sp</item>
         <item name="android:singleLine">true</item>
     </style>
-    <!-- Default Content Text Style -->
-    <style name="ContentText" parent="TextTheme">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/pc_dark_grey</item>
-    </style>
-    <!-- Grey Content Text Style -->
-    <style name="GreyContentText" parent="ContentText">
-        <item name="android:textColor">@color/pc_gray</item>
-    </style>
-    <!-- Default Button Style -->
-    <style name="Button" parent="ContentText">
+    <!-- Subtitle Text Style -->
+    <style name="TextAppearance.Subtitle" parent="TextTheme">
+        <item name="android:textSize">18sp</item>
         <item name="android:singleLine">true</item>
     </style>
 
-    <style name="GreenButton" parent="Button">
+    <!-- Default Content Text Style -->
+    <style name="TextAppearance.Content" parent="TextTheme">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_blank</item>
     </style>
+    <!-- Grey Content Text Style -->
+    <style name="TextAppearance.GreyContent" parent="TextAppearance.Content">
+        <item name="android:textColor">@color/text_gray</item>
+    </style>
+    <!-- Default Button Style -->
+    <style name="Button" parent="TextAppearance.Content">
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="GreenButton" parent="Button"></style>
     <!-- Default EditText Style -->
     <!-- Default Summary Text Style -->
-    <style name="EditText" parent="ContentText"></style>
+    <style name="EditText" parent="TextAppearance.Content"></style>
 
-    <style name="SummaryText" parent="TextTheme">
+    <style name="TextAppearance.Summary" parent="TextTheme">
         <item name="android:textSize">14sp</item>
         <item name="android:singleLine">true</item>
     </style>
 
-    <style name="SmallText" parent="TextTheme">
+    <style name="TextAppearance.Small" parent="TextTheme">
         <item name="android:textSize">12sp</item>
         <item name="android:singleLine">true</item>
     </style>
     <!-- Grey Summary Text Style -->
-    <style name="GreySummaryText" parent="SummaryText">
-        <item name="android:textColor">@color/pc_gray</item>
+    <style name="TextAppearance.GreySummary" parent="TextAppearance.Summary">
+        <item name="android:textColor">@color/text_gray</item>
     </style>
     <!-- Default List Style -->
     <style name="List">

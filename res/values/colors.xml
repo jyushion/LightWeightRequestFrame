@@ -20,12 +20,10 @@
 <resources>
 
     <!--  -->
-    <color name="pc_dark_grey">#333333</color>
-    <color name="pc_gray">#666666</color>
-    <color name="pc_light_gray">#999999</color>
-    <color name="pc_blue">#1987de</color>
-    <color name="pc_orange">#ff6600</color>
+    <color name="text_blank">#333333</color>
+    <color name="text_gray">#666666</color>
     <!--  -->
     <color name="drawer_line">#b1bac1</color>
-<color name="transparent">#00000000</color>
+    <color name="transparent">#00000000</color>
+
 </resources>

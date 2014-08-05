@@ -13,15 +13,12 @@ public final class R {
     public static final class color {
         /**   
          */
-        public static final int drawer_line=0x7f040005;
-        public static final int pc_blue=0x7f040003;
+        public static final int drawer_line=0x7f040002;
         /**   
          */
-        public static final int pc_dark_grey=0x7f040000;
-        public static final int pc_gray=0x7f040001;
-        public static final int pc_light_gray=0x7f040002;
-        public static final int pc_orange=0x7f040004;
-        public static final int transparent=0x7f040006;
+        public static final int text_blank=0x7f040000;
+        public static final int text_gray=0x7f040001;
+        public static final int transparent=0x7f040003;
     }
     public static final class dimen {
         /** 
@@ -130,38 +127,41 @@ public final class R {
         public static final int AppTheme=0x7f070002;
         /**  Default Button Style 
          */
-        public static final int Button=0x7f070008;
-        /**  Default Content Text Style 
-         */
-        public static final int ContentText=0x7f070006;
-        public static final int DividerHorizontal=0x7f070010;
-        public static final int DividerVertical=0x7f070011;
+        public static final int Button=0x7f070009;
+        public static final int DividerHorizontal=0x7f070011;
+        public static final int DividerVertical=0x7f070012;
         /**  Default EditText Style 
  Default Summary Text Style 
          */
-        public static final int EditText=0x7f07000a;
-        public static final int GreenButton=0x7f070009;
-        /**  Grey Content Text Style 
-         */
-        public static final int GreyContentText=0x7f070007;
-        /**  Grey Summary Text Style 
-         */
-        public static final int GreySummaryText=0x7f07000d;
+        public static final int EditText=0x7f07000b;
+        public static final int GreenButton=0x7f07000a;
         /**  Default Grid Style 
          */
-        public static final int Grid=0x7f07000f;
-        /**  Large Text Style 
-         */
-        public static final int LargeText=0x7f070004;
+        public static final int Grid=0x7f070010;
         /**  Default List Style 
          */
-        public static final int List=0x7f07000e;
-        public static final int SmallText=0x7f07000c;
-        public static final int SummaryText=0x7f07000b;
-        public static final int TextTheme=0x7f070003;
-        public static final int Theme_Transparent=0x7f070000;
+        public static final int List=0x7f07000f;
+        /**  Default Content Text Style 
+         */
+        public static final int TextAppearance_Content=0x7f070007;
+        /**  Grey Content Text Style 
+         */
+        public static final int TextAppearance_GreyContent=0x7f070008;
+        /**  Grey Summary Text Style 
+         */
+        public static final int TextAppearance_GreySummary=0x7f07000e;
+        /**  Large Text Style 
+         */
+        public static final int TextAppearance_Large=0x7f070004;
+        public static final int TextAppearance_Small=0x7f07000d;
+        /**  Subtitle Text Style 
+         */
+        public static final int TextAppearance_Subtitle=0x7f070006;
+        public static final int TextAppearance_Summary=0x7f07000c;
         /**  Title Text Style 
          */
-        public static final int TitleText=0x7f070005;
+        public static final int TextAppearance_Title=0x7f070005;
+        public static final int TextTheme=0x7f070003;
+        public static final int Theme_Transparent=0x7f070000;
     }
 }

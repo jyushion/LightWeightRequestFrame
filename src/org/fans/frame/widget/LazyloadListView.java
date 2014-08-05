@@ -294,6 +294,7 @@ public class LazyloadListView extends RelativeLayout implements OnScrollListener
 			mFooterView.setVisibility(View.GONE);
 		}
 		if (mAdapter.getCount() == 0) {
+			mEmptyLoading.setVisibility(View.GONE);
 			mEmptyNoData.setVisibility(View.VISIBLE);
 			mEmptyNoData.setText(mLoadFailPrompt);
 		} else {
