@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.Observable;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import org.fans.frame.utils.NetworkChecker;
+import org.fans.frame.utils.NetworkUtil;
 
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
@@ -100,7 +100,8 @@ public class Session extends Observable {
 		} catch (UnsupportedEncodingException e) {
 		}
 		// addressDB = new AddressesDatabase(context);
-		mScale = context.getResources().getDisplayMetrics().density;
+		displayMetrics= context.getResources().getDisplayMetrics();
+		mScale =displayMetrics.density;
 		// bitmapCache = new ImageCache();
 
 		// if (Environment.getExternalStorageState() ==
@@ -111,7 +112,7 @@ public class Session extends Observable {
 		// }
 		try {
 			networkChangedListeners=new CopyOnWriteArrayList<Session.NetworkChangedListener>();
-			networkAvailable = NetworkChecker.isNetworkAvailable(context);
+			networkAvailable = NetworkUtil.isNetworkAvailable(context);
 			IntentFilter filter = new IntentFilter();
 			filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
 			context.registerReceiver(mReceiver, filter);
@@ -132,7 +133,7 @@ public class Session extends Observable {
 			String action = intent.getAction();
 			if (action.equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
 				// synchronized (Session.this) {
-				networkAvailable = NetworkChecker.isNetworkAvailable(mContext);
+				networkAvailable = NetworkUtil.isNetworkAvailable(mContext);
 				// }
 				for (NetworkChangedListener networkChangedListener : networkChangedListeners) {
 					networkChangedListener.onNetworkStateChanged(networkAvailable);
@@ -146,7 +147,7 @@ public class Session extends Observable {
 		// synchronized (this) {
 		// return networkAvailable;
 		// }
-		return NetworkChecker.isNetworkAvailable(mContext);
+		return NetworkUtil.isNetworkAvailable(mContext);
 	}
 
 	public void addNetworkChangedListener(NetworkChangedListener networkChangedListener) {
@@ -332,8 +333,5 @@ public class Session extends Observable {
 		return displayMetrics;
 	}
 
-	public void setDisplayMetrics(DisplayMetrics displayMetrics) {
-		this.displayMetrics = displayMetrics;
-	}
 
 }
