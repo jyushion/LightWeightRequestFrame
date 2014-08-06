@@ -5,7 +5,7 @@ import android.util.Log;
 /**
  * Utility class for LogCat.
  * 
- * @author ludq@hyxt.com
+ * @author Ludaiqian
  */
 public class Logger {
 
