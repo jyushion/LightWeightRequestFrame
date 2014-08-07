@@ -8,5 +8,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="src" path="lib-volley"/>
+	<classpathentry kind="src" path="lib-ormlite"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
