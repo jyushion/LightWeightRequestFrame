@@ -4,7 +4,7 @@ import org.fans.frame.api.packet.ApiResponse;
 import org.fans.frame.api.packet.Error;
 
 
-public class BaseApiResponse<T> implements ApiResponse<T> {
+public class Response<T> implements ApiResponse<T> {
 	private String message;
 
 	private T data;

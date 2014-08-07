@@ -2,7 +2,7 @@ package org.fans.frame.api.packet.demo.response;
 
 import org.fans.frame.api.packet.PageableResponse;
 
-public class PageableResposneImpl<T> extends BaseApiResponse<T> implements PageableResponse<T> {
+public class PageableResposneImpl<T> extends Response<T> implements PageableResponse<T> {
 	/**
 	 * 接口返回数据总量
 	 */

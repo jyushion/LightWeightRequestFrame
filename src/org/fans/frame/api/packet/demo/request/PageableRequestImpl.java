@@ -3,7 +3,7 @@ package org.fans.frame.api.packet.demo.request;
 import org.fans.frame.api.packet.Name;
 import org.fans.frame.api.packet.PageableRequest;
 
-public class PageableRequestImpl extends BaseApiRequest implements PageableRequest {
+public class PageableRequestImpl extends Request implements PageableRequest {
 	@Name("paqgeIndex")
 	private int currentPage = 1;
 	@Name("pageSize")

@@ -2,8 +2,8 @@ package org.fans.frame.api.packet.demo.request;
 
 import org.fans.frame.api.packet.ApiRequest;
 
-public class BaseApiRequest implements ApiRequest {
-
+public class Request implements ApiRequest {
+	
 	private String method;
 
 	public void setMethod(String method) {
