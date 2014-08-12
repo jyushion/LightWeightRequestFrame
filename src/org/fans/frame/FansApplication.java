@@ -22,6 +22,7 @@ public class FansApplication extends Application {
 	private Session session;
 	private HashMap<String, Object> globalObjCache;
 	private ImageLoaderConfiguration config;
+	private File cacheDir;
 
 	public static FansApplication getInstance() {
 		return instance;
@@ -38,6 +39,9 @@ public class FansApplication extends Application {
 		appContext = getApplicationContext();
 		session = new Session(this);
 		globalObjCache = new HashMap<String, Object>(10);
+		cacheDir = Utils.getDiskCachePath(this, Constants.CACHE_DIR_NAME);
+		if (!cacheDir.exists())
+			cacheDir.mkdir();
 		initImageLoader(this);
 	}
 
@@ -70,9 +74,7 @@ public class FansApplication extends Application {
 		// ImageLoaderConfiguration.createDefault(this);
 		// method.
 		try {
-			File cacheDir = Utils.getDiskCacheDir(context, Constants.CACHE_DIR_NAME);
-			if (!cacheDir.exists())
-				cacheDir.mkdir();
+
 			DiscCacheAware discCache = new FileCountLimitedDiscCache(cacheDir, new Md5FileNameGenerator(), 100);
 
 			config = new ImageLoaderConfiguration.Builder(context).threadPriority(Thread.NORM_PRIORITY - 2)
@@ -88,6 +90,10 @@ public class FansApplication extends Application {
 
 	public ImageLoaderConfiguration getImageLoaderConfig() {
 		return config;
+	}
+
+	public File getCacheFolder() {
+		return null;
 	}
 
 }

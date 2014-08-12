@@ -79,7 +79,45 @@ public final class VersionUtils
     	return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN;
     }
     
-    
+
+	/**
+	 * 
+	 * Android 2.2为 “Froyo”“冻酸奶”
+	 * */
+	public static boolean hasFroyo() {
+		// Can use static final constants like FROYO, declared in later versions
+		// of the OS since they are inlined at compile time. This is guaranteed
+		// behavior.
+		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO;//
+	}
+
+	/**
+	 * Android 2.3为 Gingerbread（姜饼）
+	 * */
+	public static boolean hasGingerbread() {
+		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD;
+	}
+
+	/**
+	 * Android 3.0为 Honeycomb蜂巢
+	 * */
+	public static boolean hasHoneycomb() {
+		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
+	}
+
+	/**
+	 * Android 3.1
+	 * */
+	public static boolean hasHoneycombMR1() {
+		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR1;
+	}
+
+	/**
+	 * Android 4.1. 果冻豆
+	 * */
+	public static boolean hasJellyBean() {
+		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN;
+	}
     
 	//获取当前版本号
 	public  static String getCurrentVersion(Context context){

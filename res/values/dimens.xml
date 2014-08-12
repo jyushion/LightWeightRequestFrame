@@ -19,5 +19,7 @@
     <dimen name="width_large">180dp</dimen>
     <dimen name="height_large">40dp</dimen>
     <!--  -->
- <dimen name="list_item_footer_height">45dp</dimen>
+    <dimen name="list_item_footer_height">45dp</dimen>
+    <dimen name="common_action_sheet_layout_padding">8dp</dimen>
+
 </resources>

@@ -25,5 +25,6 @@
     <!--  -->
     <color name="drawer_line">#b1bac1</color>
     <color name="transparent">#00000000</color>
-
+ <color name="action_sheet_button_red">#fd472b</color>
+    <color name="action_sheet_button_blue">#0079ff</color>
 </resources>

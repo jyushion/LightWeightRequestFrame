@@ -8,17 +8,37 @@
 package com.fans.frame;
 
 public final class R {
+    public static final class anim {
+        public static final int decelerate_cubic=0x7f040000;
+        public static final int dialog_enter=0x7f040001;
+        public static final int dialog_exit=0x7f040002;
+        public static final int dialog_push_in=0x7f040003;
+        public static final int dialog_push_out=0x7f040004;
+    }
+    public static final class array {
+        public static final int constellations=0x7f050000;
+        public static final int detail_camer_pic=0x7f050003;
+        public static final int detail_profile_avatar=0x7f050002;
+        public static final int detail_profile_menu_sel_gender=0x7f050001;
+    }
     public static final class attr {
     }
     public static final class color {
+        public static final int action_sheet_button_blue=0x7f060005;
+        public static final int action_sheet_button_red=0x7f060004;
         /**   
          */
-        public static final int drawer_line=0x7f040002;
+        public static final int drawer_line=0x7f060002;
+        public static final int skin_action_sheet_title=0x7f060006;
+        public static final int skin_action_sheet_title_color=0x7f060007;
+        public static final int skin_aio_send_button=0x7f060008;
+        public static final int skin_chat_nick=0x7f060009;
+        public static final int skin_input=0x7f06000a;
         /**   
          */
-        public static final int text_blank=0x7f040000;
-        public static final int text_gray=0x7f040001;
-        public static final int transparent=0x7f040003;
+        public static final int text_blank=0x7f060000;
+        public static final int text_gray=0x7f060001;
+        public static final int transparent=0x7f060003;
     }
     public static final class dimen {
         /** 
@@ -26,65 +46,91 @@ public final class R {
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f050012;
-        public static final int height_large=0x7f050010;
-        public static final int height_medium=0x7f05000e;
-        public static final int height_small=0x7f05000c;
-        public static final int interval_margin=0x7f050004;
-        public static final int layout_horizontal_margin=0x7f050001;
-        public static final int layout_margin=0x7f050000;
-        public static final int layout_vertical_margin=0x7f050002;
+        public static final int activity_horizontal_margin=0x7f070013;
+        public static final int common_action_sheet_layout_padding=0x7f070012;
+        public static final int height_large=0x7f070010;
+        public static final int height_medium=0x7f07000e;
+        public static final int height_small=0x7f07000c;
+        public static final int interval_margin=0x7f070004;
+        public static final int layout_horizontal_margin=0x7f070001;
+        public static final int layout_margin=0x7f070000;
+        public static final int layout_vertical_margin=0x7f070002;
         /**   
          */
-        public static final int list_item_footer_height=0x7f050011;
-        public static final int list_item_margin=0x7f050003;
-        public static final int space_large=0x7f050009;
-        public static final int space_large_h=0x7f05000a;
-        public static final int space_medium=0x7f050007;
-        public static final int space_medium_h=0x7f050008;
+        public static final int list_item_footer_height=0x7f070011;
+        public static final int list_item_margin=0x7f070003;
+        public static final int space_large=0x7f070009;
+        public static final int space_large_h=0x7f07000a;
+        public static final int space_medium=0x7f070007;
+        public static final int space_medium_h=0x7f070008;
         /**  Dimension for loading drawable 
          */
-        public static final int space_small=0x7f050005;
-        public static final int space_small_h=0x7f050006;
-        public static final int width_large=0x7f05000f;
-        public static final int width_medium=0x7f05000d;
-        public static final int width_small=0x7f05000b;
+        public static final int space_small=0x7f070005;
+        public static final int space_small_h=0x7f070006;
+        public static final int width_large=0x7f07000f;
+        public static final int width_medium=0x7f07000d;
+        public static final int width_small=0x7f07000b;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
-        public static final int progress_indeterminate_drawable=0x7f020001;
-        public static final int refresh_button_selector=0x7f020002;
-        public static final int refresh_right_h=0x7f020003;
-        public static final int refresh_right_n=0x7f020004;
+        public static final int actionsheet_bottom=0x7f020000;
+        public static final int actionsheet_bottom_normal=0x7f020001;
+        public static final int actionsheet_bottom_pressed=0x7f020002;
+        public static final int actionsheet_middle=0x7f020003;
+        public static final int actionsheet_middle_normal=0x7f020004;
+        public static final int actionsheet_middle_pressed=0x7f020005;
+        public static final int actionsheet_single=0x7f020006;
+        public static final int actionsheet_single_normal=0x7f020007;
+        public static final int actionsheet_single_pressed=0x7f020008;
+        public static final int actionsheet_top=0x7f020009;
+        public static final int actionsheet_top_normal=0x7f02000a;
+        public static final int actionsheet_top_pressed=0x7f02000b;
+        public static final int common_bottom_dialog_checked_icon=0x7f02000c;
+        public static final int ic_launcher=0x7f02000d;
+        public static final int progress_indeterminate_drawable=0x7f02000e;
+        public static final int refresh_button_selector=0x7f02000f;
+        public static final int refresh_right_h=0x7f020010;
+        public static final int refresh_right_n=0x7f020011;
     }
     public static final class id {
-        public static final int action_settings=0x7f090006;
-        public static final int footer_progressbar=0x7f090000;
-        public static final int footer_retry=0x7f090001;
-        public static final int list_view=0x7f090002;
-        public static final int loading=0x7f090003;
-        public static final int progressbar=0x7f090004;
-        public static final int retry=0x7f090005;
+        public static final int action_settings=0x7f0b000d;
+        public static final int action_sheet_actionView=0x7f0b0000;
+        public static final int action_sheet_btnCancel=0x7f0b0002;
+        public static final int action_sheet_button=0x7f0b0003;
+        public static final int action_sheet_checkedIcon=0x7f0b0004;
+        public static final int action_sheet_contentView=0x7f0b0001;
+        public static final int action_sheet_secondary_title=0x7f0b0006;
+        public static final int action_sheet_title=0x7f0b0005;
+        public static final int footer_progressbar=0x7f0b0007;
+        public static final int footer_retry=0x7f0b0008;
+        public static final int list_view=0x7f0b0009;
+        public static final int loading=0x7f0b000a;
+        public static final int progressbar=0x7f0b000b;
+        public static final int retry=0x7f0b000c;
     }
     public static final class layout {
-        public static final int footer=0x7f030000;
-        public static final int lazy_list_view=0x7f030001;
-        public static final int loading=0x7f030002;
-        public static final int progress_bar=0x7f030003;
+        public static final int action_sheet_base=0x7f030000;
+        public static final int action_sheet_cancel_button=0x7f030001;
+        public static final int action_sheet_common_button=0x7f030002;
+        public static final int action_sheet_title=0x7f030003;
+        public static final int footer=0x7f030004;
+        public static final int lazy_list_view=0x7f030005;
+        public static final int loading=0x7f030006;
+        public static final int progress_bar=0x7f030007;
     }
     public static final class menu {
-        public static final int main=0x7f080000;
+        public static final int main=0x7f0a0000;
     }
     public static final class string {
-        public static final int action_settings=0x7f060001;
-        public static final int app_name=0x7f060000;
-        public static final int hello_world=0x7f060002;
-        public static final int load_faild=0x7f060005;
-        public static final int load_finish=0x7f060004;
+        public static final int action_settings=0x7f080001;
+        public static final int app_name=0x7f080000;
+        public static final int cancle=0x7f080007;
+        public static final int hello_world=0x7f080002;
+        public static final int load_faild=0x7f080005;
+        public static final int load_finish=0x7f080004;
         /**  loading 
          */
-        public static final int loading_more=0x7f060003;
-        public static final int no_data=0x7f060006;
+        public static final int loading_more=0x7f080003;
+        public static final int no_data=0x7f080006;
     }
     public static final class style {
         /** 
@@ -120,48 +166,59 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f070001;
+        public static final int AppBaseTheme=0x7f090001;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f070002;
+        public static final int AppTheme=0x7f090002;
         /**  Default Button Style 
          */
-        public static final int Button=0x7f070009;
-        public static final int DividerHorizontal=0x7f070011;
-        public static final int DividerVertical=0x7f070012;
+        public static final int Button=0x7f090009;
+        public static final int DividerHorizontal=0x7f090011;
+        public static final int DividerVertical=0x7f090012;
         /**  Default EditText Style 
  Default Summary Text Style 
          */
-        public static final int EditText=0x7f07000b;
-        public static final int GreenButton=0x7f07000a;
+        public static final int EditText=0x7f09000b;
+        public static final int GreenButton=0x7f09000a;
         /**  Default Grid Style 
          */
-        public static final int Grid=0x7f070010;
+        public static final int Grid=0x7f090010;
         /**  Default List Style 
          */
-        public static final int List=0x7f07000f;
+        public static final int List=0x7f09000f;
+        /**  Menu Dialog 
+         */
+        public static final int MenuDialogAnimation=0x7f090015;
+        public static final int MenuDialogStyle=0x7f090014;
         /**  Default Content Text Style 
          */
-        public static final int TextAppearance_Content=0x7f070007;
+        public static final int TextAppearance_Content=0x7f090007;
         /**  Grey Content Text Style 
          */
-        public static final int TextAppearance_GreyContent=0x7f070008;
+        public static final int TextAppearance_GreyContent=0x7f090008;
         /**  Grey Summary Text Style 
          */
-        public static final int TextAppearance_GreySummary=0x7f07000e;
+        public static final int TextAppearance_GreySummary=0x7f09000e;
         /**  Large Text Style 
          */
-        public static final int TextAppearance_Large=0x7f070004;
-        public static final int TextAppearance_Small=0x7f07000d;
+        public static final int TextAppearance_Large=0x7f090004;
+        public static final int TextAppearance_Small=0x7f09000d;
         /**  Subtitle Text Style 
          */
-        public static final int TextAppearance_Subtitle=0x7f070006;
-        public static final int TextAppearance_Summary=0x7f07000c;
+        public static final int TextAppearance_Subtitle=0x7f090006;
+        public static final int TextAppearance_Summary=0x7f09000c;
         /**  Title Text Style 
          */
-        public static final int TextAppearance_Title=0x7f070005;
-        public static final int TextTheme=0x7f070003;
-        public static final int Theme_Transparent=0x7f070000;
+        public static final int TextAppearance_Title=0x7f090005;
+        public static final int TextTheme=0x7f090003;
+        public static final int Theme_Transparent=0x7f090000;
+        public static final int action_sheet_btn_style=0x7f090018;
+        public static final int action_sheet_content_style=0x7f090019;
+        /**  actionsheet 
+         */
+        public static final int action_sheet_layout_style=0x7f090013;
+        public static final int action_sheet_secondary_title_style=0x7f090017;
+        public static final int action_sheet_title_style=0x7f090016;
     }
 }

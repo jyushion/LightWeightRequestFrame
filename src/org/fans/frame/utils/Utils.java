@@ -13,12 +13,14 @@ import org.fans.frame.widget.LoadingDialog;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.os.Build;
 import android.os.Environment;
+import android.os.StatFs;
 
 import com.android.volley.Request.Method;
 
 public class Utils {
+
+	private static final long LOW_STORAGE_THRESHOLD = 1024 * 1024 * 15;
 
 	public static DialogTaskExecutor getDefaultExecutor(Context context) {
 		DialogTaskExecutor executor = DialogTaskExecutor.getInstance();
@@ -52,7 +54,7 @@ public class Utils {
 	 *            A unique directory name to append to the cache dir
 	 * @return The cache dir
 	 */
-	public static File getDiskCacheDir(Context context, String uniqueName) {
+	public static File getDiskCachePath(Context context, String uniqueName) {
 
 		// Check if media is mounted or storage is built-in, if so, try and use
 		// external cache dir
@@ -90,7 +92,7 @@ public class Utils {
 
 	public static File getExternalCacheDir(Context context) {
 
-		if (Utils.hasFroyo()) {
+		if (VersionUtils.hasFroyo()) {
 			return context.getExternalCacheDir();
 
 		}
@@ -102,43 +104,59 @@ public class Utils {
 
 	}
 
+	private static String getExternalStoragePath() {
+		// 获取SdCard状态
+		String state = android.os.Environment.getExternalStorageState();
+		// 判断SdCard是否存在并且是可用的
+		if (android.os.Environment.MEDIA_MOUNTED.equals(state)) {
+			if (android.os.Environment.getExternalStorageDirectory().canWrite()) {
+				return android.os.Environment.getExternalStorageDirectory().getPath();
+			}
+		}
+		return null;
+	}
+
+	public static boolean checkSdCardAvailable() {
+
+		String state = Environment.getExternalStorageState();
+		File sdCardDir = Environment.getExternalStorageDirectory();
+		if (android.os.Environment.MEDIA_MOUNTED.equals(state) && sdCardDir.canWrite()) {
+			if (getAvailableStore(sdCardDir.toString()) > LOW_STORAGE_THRESHOLD) {
+				try {
+					// File f = new
+					// File(Environment.getExternalStorageDirectory(), "_temp");
+					// f.createNewFile();
+					// f.delete();
+					return true;
+				} catch (Exception e) {
+				}
+			}
+		}
+		return false;
+
+	}
+
 	/**
 	 * 
-	 * Android 2.2为 “Froyo”“冻酸奶”
-	 * */
-	public static boolean hasFroyo() {
-		// Can use static final constants like FROYO, declared in later versions
-		// of the OS since they are inlined at compile time. This is guaranteed
-		// behavior.
-		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO;//
-	}
+	 * 获取存储卡的剩余容量，单位为字节
+	 * 
+	 * @param filePath
+	 * 
+	 * @return availableSpare
+	 */
 
-	/**
-	 * Android 2.3为 Gingerbread（姜饼）
-	 * */
-	public static boolean hasGingerbread() {
-		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD;
-	}
+	private static long getAvailableStore(String filePath) {
+		// 取得sdcard文件路径
+		StatFs statFs = new StatFs(filePath);
+		// 获取block的SIZE
+		long blocSize = statFs.getBlockSize();
+		// 获取BLOCK数量
+		long totalBlocks = statFs.getBlockCount();
+		// 可使用的Block的数量
+		long availaBlock = statFs.getAvailableBlocks();
+		long availableSpare = availaBlock * blocSize;
+		return availableSpare;
 
-	/**
-	 * Android 3.0为 Honeycomb蜂巢
-	 * */
-	public static boolean hasHoneycomb() {
-		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
-	}
-
-	/**
-	 * Android 3.1
-	 * */
-	public static boolean hasHoneycombMR1() {
-		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR1;
-	}
-
-	/**
-	 * Android 4.1. 果冻豆
-	 * */
-	public static boolean hasJellyBean() {
-		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN;
 	}
 
 }
