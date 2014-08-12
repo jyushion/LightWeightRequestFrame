@@ -18,21 +18,23 @@ package org.fans.frame.api.executor;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ListIterator;
 
 import org.fans.frame.api.packet.ApiRequest;
 import org.fans.frame.api.packet.ApiResponse;
+import org.fans.frame.utils.Logger;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 
+import com.android.volley.Request;
 import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.Volley;
 
 /**
  * 执行一个任务队列，并可以显示一个进度条，当所有任务完成时，这个进度条才会消失<br>
@@ -50,21 +52,17 @@ public abstract class DialogTask implements DialogInterface.OnCancelListener {
 	private RequestQueue requestQueue;
 	private ArrayList<StringRequest> runningRequests;
 	private boolean dialogVisible = true;
-	private static RequestQueue DEFAULT_QUEUE;
 	private Serializer serializer;
 	private ParamsBuilderProvider provider;
 	private String url;
 	private int method = Method.POST;
+	private HashMap<ApiRequest, Request<?>> requestsCache;
 
-	public DialogTask(Context context) {
+	public DialogTask(Context context, RequestQueue requestQueue) {
 		this.mContext = context;
-		if (DEFAULT_QUEUE == null) {
-			DEFAULT_QUEUE = Volley.newRequestQueue(context.getApplicationContext());
-		} else {
-			DEFAULT_QUEUE.start();
-		}
-		requestQueue = DEFAULT_QUEUE;
+		this.requestQueue = requestQueue;
 		runningRequests = new ArrayList<StringRequest>();
+		requestsCache = new HashMap<ApiRequest, Request<?>>();
 	}
 
 	public void setSerializer(Serializer serializer) {
@@ -100,6 +98,7 @@ public abstract class DialogTask implements DialogInterface.OnCancelListener {
 	}
 
 	public void execute(ApiRequest... requests) {
+		// this.requests=requests ;
 		onPreExecute();
 		for (final ApiRequest apiRequest : requests) {
 			if (apiRequest.getMethod() == null) {
@@ -147,6 +146,8 @@ public abstract class DialogTask implements DialogInterface.OnCancelListener {
 			runningRequests.add(request);
 			// requests.a
 			// requestQueue.size();
+			requestsCache.put(apiRequest, request);
+
 		}
 	}
 
@@ -168,8 +169,7 @@ public abstract class DialogTask implements DialogInterface.OnCancelListener {
 			}
 		}
 		if (runningRequests.size() == 0) {
-			dismissDialog();
-			onFinishExecuted();
+			onTaskFinished();
 		}
 
 	}
@@ -178,13 +178,15 @@ public abstract class DialogTask implements DialogInterface.OnCancelListener {
 		return new DefaultParamsBuilder(request);
 	}
 
-	private void dismissDialog() {
-		if (mProgressDialog != null)
-			mProgressDialog.dismiss();
-	}
-
+	// private void dismissDialog() {
+	// if (mProgressDialog != null)
+	// mProgressDialog.dismiss();
+	// }
+	/**
+	 * 当队列的全部request执行完成或者取消时调用
+	 */
 	protected void onFinishExecuted() {
-
+		Logger.i("finished executed:"+this);
 	}
 
 	/**
@@ -209,10 +211,10 @@ public abstract class DialogTask implements DialogInterface.OnCancelListener {
 		this.dialogVisible = visible;
 	}
 
-	public void cancel() {
+	public void dismissDialog() {
 		if (mProgressDialog != null)
 			mProgressDialog.dismiss();
-		requestQueue.stop();
+		// requestQueue.stop();
 	}
 
 	public static ParamsBuilder getParamsBuilder(Class<? extends ParamsBuilder> type, ApiRequest request) {
@@ -231,6 +233,35 @@ public abstract class DialogTask implements DialogInterface.OnCancelListener {
 
 	@Override
 	public void onCancel(DialogInterface dialog) {
-		cancel();
+		cancleRequests();
+		onFinishExecuted();
+		// return ;
 	}
+
+	public void cancle() {
+		cancleRequests();
+		onTaskFinished();
+	}
+
+	public void cancle(ApiRequest apiRquest) {
+		Request<?> request = requestsCache.remove(apiRquest);
+		request.cancel();
+		if (requestsCache.size() == 0) {
+			onTaskFinished();
+			//
+		}
+	}
+
+	private void onTaskFinished() {
+		dismissDialog();
+		onFinishExecuted();
+	}
+
+	private void cancleRequests() {
+		for (Request<?> cache : requestsCache.values()) {
+			cache.cancel();
+		}
+		requestsCache.clear();
+	}
+
 }

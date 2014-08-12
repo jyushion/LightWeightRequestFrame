@@ -1,21 +1,26 @@
 package org.fans.frame.api.executor;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.fans.frame.FansApplication;
 import org.fans.frame.api.packet.ApiRequest;
 import org.fans.frame.api.packet.ApiResponse;
+import org.fans.frame.utils.Logger;
 
 import android.content.Context;
 import android.content.DialogInterface;
 
 import com.android.volley.Request.Method;
+import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
 
 /**
- * 提供对异步任务的配置，执行及回调。
+ * 提供对异步任务的配置，执行、取消及回调。
  * 
  * @author Ludaiqian
  * @since 1.0
@@ -24,6 +29,8 @@ public class DialogTaskExecutor {
 
 	// private DialogTask task;
 	private Map<String, DialogTask> requestsCache;
+
+	private Map<Context, List<DialogTask>> contextCache;
 	private ParamsBuilderProvider paramsBuildersProvider;
 	public static final DialogTaskExecutor DEFAULT_TASK_EXECUTOR = new DialogTaskExecutor();
 	private KeyGenerator keyGenerator;
@@ -31,10 +38,14 @@ public class DialogTaskExecutor {
 	private DialogProvider dialogProvider;
 	private String url;
 	private int method = Method.POST;
-	private static boolean configured = false;
+	private boolean stop = false;
+	private boolean configured = false;
+	private RequestQueue requestQueue;
 
 	private DialogTaskExecutor() {
-		requestsCache = Collections.synchronizedMap(new HashMap<String, DialogTask>());
+		requestsCache = new HashMap<String, DialogTask>();
+		requestQueue = Volley.newRequestQueue(FansApplication.getInstance());
+		contextCache = new HashMap<Context, List<DialogTask>>();
 	}
 
 	public static DialogTaskExecutor getInstance() {
@@ -80,16 +91,19 @@ public class DialogTaskExecutor {
 	 * @param requests
 	 */
 
-	public void execute(Context context, boolean showDialog, final TaskResultPicker resultPicker, final ApiRequest... requests) {
+	public void execute(final Context context, boolean showDialog, final TaskResultPicker resultPicker,
+			final ApiRequest... requests) {
 		// requestsCache.put(generateKey(true, request), value);
+		checkIfReleased();
 		checkNecessaryFeildsIfNull();
 		final String key = keyGenerator != null ? keyGenerator.generateKey(requests) : //
 				DEFAULT_KEY_GENERATOR.generateKey(requests);
 		if (!requestsCache.containsKey(key)) {
-			DialogTask task = new DialogTask(context) {
+			DialogTask task = new DialogTask(context, requestQueue) {
 				@Override
 				public void onPreExecute() {
 					super.onPreExecute();
+					// requestQueue.start();
 					resultPicker.onPrepareExecute(requests);
 				}
 
@@ -122,8 +136,18 @@ public class DialogTaskExecutor {
 				protected void onFinishExecuted() {
 					super.onFinishExecuted();
 					requestsCache.remove(key);
+					List<DialogTask> taskList = contextCache.get(context);
+					if (taskList != null) {
+						// contextCache.remove(`)
+						taskList.remove(this);
+						if (taskList.size() == 0) {
+							// taskList.clear();
+							contextCache.remove(context);
+						}
+					}
 				}
 			};
+			cacheContextTask(context, task);
 			requestsCache.put(key, task);
 			task.setUrl(url);
 			task.setMethod(method);
@@ -134,6 +158,20 @@ public class DialogTaskExecutor {
 			task.setDialogVisible(showDialog);
 			task.execute(requests);
 		}
+	}
+
+	private void cacheContextTask(Context context, DialogTask task) {
+		List<DialogTask> tasks = contextCache.get(context);
+		if (tasks == null) {
+			tasks = new ArrayList<DialogTask>();
+			contextCache.put(context, tasks);
+		}
+		tasks.add(task);
+	}
+
+	private void checkIfReleased() {
+		if (stop)
+			throw new IllegalStateException("executor was stoped.");
 	}
 
 	private void checkNecessaryFeildsIfNull() {
@@ -171,14 +209,45 @@ public class DialogTaskExecutor {
 		public String generateKey(ApiRequest... requestArray);
 	}
 
-	/**
-	 * 释放资源
-	 */
-	public void release() {
+	public void cancleAll() {
 		for (Entry<String, DialogTask> entry : requestsCache.entrySet()) {
-			entry.getValue().cancel();
+			entry.getValue().cancle();
 		}
 		requestsCache.clear();
+		contextCache.clear();
+	}
+
+	/**
+	 * 取消一个现有的任务队列或任务队列
+	 */
+	public void cancle(ApiRequest... apiRequest) {
+		KeyGenerator keyGenerator = this.keyGenerator == null ? DEFAULT_KEY_GENERATOR : this.keyGenerator;
+		DialogTask task = requestsCache.remove(keyGenerator.generateKey(apiRequest));
+		if (task != null) {
+			task.cancle();
+		}
+		Logger.d("cancel task :" + task);
+	}
+
+	/**
+	 * 取消与context相关的任务
+	 * 
+	 * @param context
+	 */
+	public void cancle(Context context) {
+		List<DialogTask> taskList = contextCache.remove(context);
+		if (taskList != null) {
+			for (DialogTask task : taskList) {
+				task.cancle();
+				Logger.d("cancel task :" + task);
+			}
+		}
+	}
+
+	public DialogTask findTask(ApiRequest... apiRequest) {
+		KeyGenerator keyGenerator = this.keyGenerator == null ? DEFAULT_KEY_GENERATOR : this.keyGenerator;
+		DialogTask task = requestsCache.get(keyGenerator.generateKey(apiRequest));
+		return task;
 	}
 
 	// public void re
@@ -187,4 +256,18 @@ public class DialogTaskExecutor {
 		return configured;
 	}
 
+	public boolean isRelease() {
+		return stop;
+	}
+
+	public void restart() {
+		requestQueue.start();
+		stop = false;
+	}
+
+	public void stop() {
+		cancleAll();
+		requestQueue.stop();
+		stop = true;
+	}
 }

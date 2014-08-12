@@ -18,7 +18,7 @@ public class NetworkActivity extends BaseActivity implements TaskResultPicker {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		executor =Utils.getDefaultExecutor(this);
+		executor = Utils.getDefaultExecutor(this);
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class NetworkActivity extends BaseActivity implements TaskResultPicker {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		executor.release();
+		executor.cancle(this);
 	}
 
 	/**
