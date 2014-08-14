@@ -94,7 +94,7 @@ public class DialogTaskExecutor {
 	public void execute(final Context context, boolean showDialog, final TaskResultPicker resultPicker,
 			final ApiRequest... requests) {
 		// requestsCache.put(generateKey(true, request), value);
-		checkIfReleased();
+		checkIfStopped();
 		checkNecessaryFeildsIfNull();
 		final String key = keyGenerator != null ? keyGenerator.generateKey(requests) : //
 				DEFAULT_KEY_GENERATOR.generateKey(requests);
@@ -169,9 +169,10 @@ public class DialogTaskExecutor {
 		tasks.add(task);
 	}
 
-	private void checkIfReleased() {
-		if (stop)
-			throw new IllegalStateException("executor was stoped.");
+	private void checkIfStopped() {
+		if (stop) {
+			restart();
+		}
 	}
 
 	private void checkNecessaryFeildsIfNull() {

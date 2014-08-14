@@ -24,8 +24,6 @@ public class NetworkActivity extends BaseActivity implements TaskResultPicker {
 	@Override
 	protected void onStart() {
 		super.onStart();
-		if (executor.isStopped())
-			executor.restart();
 	}
 
 	/**
