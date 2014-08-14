@@ -21,6 +21,13 @@ public class NetworkActivity extends BaseActivity implements TaskResultPicker {
 		executor = Utils.getDefaultExecutor(this);
 	}
 
+	@Override
+	protected void onStart() {
+		super.onStart();
+		if (executor.isStopped())
+			executor.restart();
+	}
+
 	/**
 	 * 向服务端发出一个或多个请求
 	 * 
@@ -46,6 +53,8 @@ public class NetworkActivity extends BaseActivity implements TaskResultPicker {
 	protected void onDestroy() {
 		super.onDestroy();
 		executor.cancle(this);
+		// executor.stop()在退出应用之前调用以便释放资源。
+		// executor.stop();
 	}
 
 	/**

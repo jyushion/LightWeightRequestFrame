@@ -256,7 +256,7 @@ public class DialogTaskExecutor {
 		return configured;
 	}
 
-	public boolean isRelease() {
+	public boolean isStopped() {
 		return stop;
 	}
 
@@ -266,8 +266,13 @@ public class DialogTaskExecutor {
 	}
 
 	public void stop() {
-		cancleAll();
-		requestQueue.stop();
+		try {
+
+			cancleAll();
+			requestQueue.stop();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		stop = true;
 	}
 }
