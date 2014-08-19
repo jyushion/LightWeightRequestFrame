@@ -1,10 +1,23 @@
 <resources>
 
+    <!-- 间隔 -->
     <dimen name="layout_margin">12dp</dimen>
     <dimen name="layout_horizontal_margin">12dp</dimen>
     <dimen name="layout_vertical_margin">12dp</dimen>
-    <dimen name="list_item_margin">5dp</dimen>
-    <dimen name="interval_margin">5dp</dimen>
+
+    <!-- Item -->
+    <dimen name="item_margin">5dp</dimen>
+    <dimen name="item_margin_h">8dp</dimen>
+
+    <!-- [非常重要]间隔大小 Dimension for Layout interval -->
+    <dimen name="interval_small">3dp</dimen>
+    <dimen name="interval_small_h">5dp</dimen>
+    <!-- interval_medium简写，方便引用 -->
+    <dimen name="interval">6dp</dimen>
+    <dimen name="interval_h">10dp</dimen>
+    <dimen name="interval_large">12dp</dimen>
+    <dimen name="interval_large_h">20dp</dimen>
+
     <!-- Dimension for loading drawable -->
     <dimen name="space_small">6dp</dimen>
     <dimen name="space_small_h">8dp</dimen>
@@ -12,14 +25,17 @@
     <dimen name="space_medium_h">14dp</dimen>
     <dimen name="space_large">20dp</dimen>
     <dimen name="space_large_h">28dp</dimen>
+
+    <!--  -->
     <dimen name="width_small">54dp</dimen>
     <dimen name="height_small">12dp</dimen>
     <dimen name="width_medium">90dp</dimen>
     <dimen name="height_medium">20dp</dimen>
     <dimen name="width_large">180dp</dimen>
     <dimen name="height_large">40dp</dimen>
+    <dimen name="toast_pop_height">42dp</dimen>
     <!--  -->
-    <dimen name="list_item_footer_height">45dp</dimen>
+    <dimen name="item_footer_height">45dp</dimen>
     <dimen name="common_action_sheet_layout_padding">8dp</dimen>
 
 </resources>

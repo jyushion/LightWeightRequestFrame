@@ -8,9 +8,30 @@
         <item name="android:windowIsFloating">true</item>
         <item name="android:backgroundDimEnabled">false</item>
     </style>
+
+    <!-- Acvity 伪造dialog -->
+    <style name="ActiviyDialogStyleBottom" parent="android:Theme.Dialog">
+
+        <!--
+           动画
+           <item name="android:windowAnimationStyle">@style/AnimBottom</item>
+        -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 边框 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 背景透明 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 模糊 -->
+    </style>
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
@@ -29,54 +50,50 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
     </style>
-    <!-- Large Text Style -->
+
+    <!-- 文字相关style -->
+    <!-- 最大文字Large Text Style -->
     <style name="TextAppearance.Large" parent="TextTheme">
         <item name="android:textSize">22sp</item>
         <item name="android:singleLine">true</item>
     </style>
-    <!-- Title Text Style -->
+    <!-- 标题文字 Title Text Style -->
     <style name="TextAppearance.Title" parent="TextTheme">
         <item name="android:textSize">20sp</item>
         <item name="android:singleLine">true</item>
     </style>
-    <!-- Subtitle Text Style -->
+    <!-- 副标题 Subtitle Text Style -->
     <style name="TextAppearance.Subtitle" parent="TextTheme">
         <item name="android:textSize">18sp</item>
         <item name="android:singleLine">true</item>
     </style>
 
-    <!-- Default Content Text Style -->
+    <!-- 一般文字 -->
     <style name="TextAppearance.Content" parent="TextTheme">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/text_blank</item>
     </style>
-    <!-- Grey Content Text Style -->
-    <style name="TextAppearance.GreyContent" parent="TextAppearance.Content">
-        <item name="android:textColor">@color/text_gray</item>
-    </style>
-    <!-- Default Button Style -->
-    <style name="Button" parent="TextAppearance.Content">
-        <item name="android:singleLine">true</item>
-    </style>
 
-    <style name="GreenButton" parent="Button"></style>
-    <!-- Default EditText Style -->
-    <!-- Default Summary Text Style -->
-    <style name="EditText" parent="TextAppearance.Content"></style>
-
+    <!-- 小文字 -->
     <style name="TextAppearance.Summary" parent="TextTheme">
         <item name="android:textSize">14sp</item>
         <item name="android:singleLine">true</item>
     </style>
-
+    <!-- 最小文字 -->
     <style name="TextAppearance.Small" parent="TextTheme">
         <item name="android:textSize">12sp</item>
         <item name="android:singleLine">true</item>
     </style>
-    <!-- Grey Summary Text Style -->
+
+    <!-- 灰色文字 Grey Content Text Style -->
+    <style name="TextAppearance.GreyContent" parent="TextAppearance.Content">
+        <item name="android:textColor">@color/text_gray</item>
+    </style>
+    <!-- 灰色文字Grey Summary Text Style -->
     <style name="TextAppearance.GreySummary" parent="TextAppearance.Summary">
         <item name="android:textColor">@color/text_gray</item>
     </style>
+    <!-- 文字结束 -->
     <!-- Default List Style -->
     <style name="List">
         <item name="android:cacheColorHint">@null</item>
@@ -89,6 +106,17 @@
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+    <!-- Default Button Style -->
+    <style name="Button" parent="TextAppearance.Content">
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <!-- Default EditText Text Style -->
+    <style name="EditText" parent="TextAppearance.Content">
+        <item name="android:layout_width">fill_parent</item>
+    </style>
+
+    <style name="GreenButton" parent="Button"></style>
 
     <style name="DividerHorizontal">
         <item name="android:layout_width">fill_parent</item>
@@ -99,9 +127,18 @@
         <item name="android:layout_width">1dp</item>
         <item name="android:layout_height">fill_parent</item>
     </style>
-    
-    
- <!-- actionsheet -->
+
+    <style name="space">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">5dp</item>
+    </style>
+
+    <style name="SpaceAutoFit">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+    <!-- actionsheet -->
     <style name="action_sheet_layout_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -120,6 +157,7 @@
         <item name="@android:windowEnterAnimation">@anim/dialog_enter</item>
         <item name="@android:windowExitAnimation">@anim/dialog_exit</item>
     </style>
+
     <style name="action_sheet_title_style">
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/skin_action_sheet_title</item>
@@ -138,7 +176,7 @@
         <item name="android:gravity">center</item>
         <item name="android:textSize">18sp</item>
     </style>
-    
+
     <style name="action_sheet_content_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -146,4 +184,10 @@
         <item name="android:paddingLeft">@dimen/common_action_sheet_layout_padding</item>
         <item name="android:paddingRight">@dimen/common_action_sheet_layout_padding</item>
     </style>
+
+    <style name="Theme.UMDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
 </resources>

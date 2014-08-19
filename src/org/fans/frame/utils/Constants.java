@@ -1,5 +1,7 @@
 package org.fans.frame.utils;
 
+import android.text.SpannableString;
+
 
 /**
  * 系统常量定义类
