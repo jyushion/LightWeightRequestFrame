@@ -50,7 +50,7 @@ public abstract class ParamsBuilder {
 	}
 
 	public String getRequestUrl() {
-		return url;
+		return getUrl();
 	}
 
 	public ParamsBuilder(ApiRequest request) {

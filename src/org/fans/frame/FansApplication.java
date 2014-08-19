@@ -3,6 +3,7 @@ package org.fans.frame;
 import java.io.File;
 import java.util.HashMap;
 
+import org.fans.frame.api.packet.demo.ServiceApi;
 import org.fans.frame.utils.Constants;
 import org.fans.frame.utils.Utils;
 
@@ -43,6 +44,7 @@ public class FansApplication extends Application {
 		if (!cacheDir.exists())
 			cacheDir.mkdir();
 		initImageLoader(this);
+		ServiceApi.init();
 	}
 
 	@Override

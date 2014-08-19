@@ -3,7 +3,6 @@ package org.fans.frame.api.packet.demo;
 import java.lang.reflect.Type;
 
 import org.apache.http.client.HttpClient;
-import org.fans.frame.api.executor.DefaultParamsBuilder;
 import org.fans.frame.api.executor.DialogTask;
 import org.fans.frame.api.executor.JsonSerializer;
 import org.fans.frame.api.executor.RequestBuilder;
@@ -11,6 +10,7 @@ import org.fans.frame.api.executor.ResponseTypeProvider;
 import org.fans.frame.api.executor.StringRequest;
 import org.fans.frame.api.packet.ApiRequest;
 import org.fans.frame.api.packet.ApiResponse;
+import org.fans.frame.api.toolbox.DefaultParamsBuilder;
 import org.fans.frame.utils.Constants;
 
 import android.net.http.AndroidHttpClient;
@@ -38,6 +38,12 @@ public class ServiceApi {
 	public static final String REGISTER = "Register";
 	// 登陆
 	public static final String LOGIN = "Login";
+
+	public static void init() {
+		// ResponseTypeProvider.getInstance().setDefaultType(defaultType);
+		// ResponseTypeProvider.getInstance().registerResponseType(methodName,
+		// responseType);
+	}
 
 	/**
 	 * 注册示例
@@ -84,7 +90,7 @@ public class ServiceApi {
 		String data = new String(response.data);
 		// 通过方法名获取响应类型
 		Type clazz = ResponseTypeProvider.getInstance().getApiResponseType(apiRequest.getMethod());
-		return (ApiResponse<T>)  JsonSerializer.DEFAULT.deserialize(data, clazz);
+		return (ApiResponse<T>) JsonSerializer.DEFAULT.deserialize(data, clazz);
 	}
 
 	private static StringRequest buildRequest(ApiRequest apiRequest) {
@@ -94,12 +100,12 @@ public class ServiceApi {
 				// .setListner(listener)//
 				// .setErrorListener(errorListener)//
 				.setParamsBuilder(new DefaultParamsBuilder(apiRequest))
-//				.setApiRequest(apiRequest)//
+				// .setApiRequest(apiRequest)//
 				.build();
 		return request;
 	}
-	
-//	public static ParamsBuilder newParamsBuilder(ApiRequest apiRequest){
-//		
-//	}
+
+	// public static ParamsBuilder newParamsBuilder(ApiRequest apiRequest){
+	//
+	// }
 }
