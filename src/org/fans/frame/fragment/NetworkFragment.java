@@ -8,6 +8,8 @@ import org.fans.frame.api.executor.DialogTaskExecutor.TaskResultPicker;
 import org.fans.frame.api.packet.ApiRequest;
 import org.fans.frame.api.packet.ApiResponse;
 import org.fans.frame.utils.Logger;
+import org.fans.frame.utils.NetworkUtil;
+import org.fans.frame.utils.ToastMaster;
 import org.fans.frame.utils.Utils;
 
 import android.app.Dialog;
@@ -15,6 +17,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import com.android.volley.VolleyError;
+import com.fans.frame.R;
 
 public abstract class NetworkFragment extends BaseFragment implements TaskResultPicker {
 
@@ -128,7 +131,7 @@ public abstract class NetworkFragment extends BaseFragment implements TaskResult
 	 * @param error
 	 */
 	public void onRequestFailed(ApiRequest request, String reason, VolleyError error) {
-
+		toastWithDefault();
 	}
 
 	@Override
@@ -140,4 +143,11 @@ public abstract class NetworkFragment extends BaseFragment implements TaskResult
 		return requestStates.get(request);
 	}
 
+	protected void toastWithDefault() {
+		if (!NetworkUtil.isNetworkAvailable(getActivity())) {
+			ToastMaster.popToast(getActivity(), R.string.network_unavailable);
+		} else {
+			ToastMaster.popToast(getActivity(), R.string.request_failed);
+		}
+	}
 }
