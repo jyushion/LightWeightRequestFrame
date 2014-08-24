@@ -101,24 +101,7 @@ public abstract class BaseFragment extends Fragment implements NetworkChangedLis
 //		}
 	}
 
-	public void onActionBarItemClick(View item, int position) {
-	}
 
-	// public ActionBarItem addActionBarItem(ActionBarItem item, int itemId) {
-	// return getSupportedActionBar().addItem(item, itemId);
-	// }
-	//
-	// public ActionBarItem addActionBarItem(ActionBarItem item) {
-	// return getSupportedActionBar().addItem(item);
-	// }
-
-
-
-	// public ActionBarItem getLeftActionBarItem() {
-	// // ensureLayout();
-	// return isActionBarSurrpoted() ?
-	// mActionBarHost.getActionBar().getLeftActionBarItem() : null;
-	// }
 
 	@Override
 	public void onStart() {
