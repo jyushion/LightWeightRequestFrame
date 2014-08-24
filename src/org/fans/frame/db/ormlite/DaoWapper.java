@@ -4,19 +4,26 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
+import org.fans.frame.db.ormlite.DataHelpeFactory.DataBaseListener;
+
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.Dao.CreateOrUpdateStatus;
 import com.j256.ormlite.stmt.QueryBuilder;
 
 public class DaoWapper<T, ID> {
 
 	private Dao<T, ID> dao;
+	private Class<T> type;
 
-	public DaoWapper(Dao<T, ID> dao) {
+	public DaoWapper(Dao<T, ID> dao,Class<T> type) {
 		super();
 		this.dao = dao;
+		this.type=type;
 	}
+
 	/**
 	 * 查询全部
+	 * 
 	 * @return
 	 * @throws SQLException
 	 */
@@ -85,8 +92,18 @@ public class DaoWapper<T, ID> {
 	 * @param data
 	 * @throws SQLException
 	 */
+	@SuppressWarnings("unchecked")
 	public void insertOrUpdate(T data) throws SQLException {
-		dao.createOrUpdate(data);
+
+		CreateOrUpdateStatus status = dao.createOrUpdate(data);
+		DataBaseListener<T> l = DataHelpeFactory.getListeners().get(type);
+		if (l != null) {
+			if (status.isCreated()) {
+				l.onDataInserted(data);
+			} else if (status.isUpdated()) {
+				l.onDataUpdated(data);
+			}
+		}
 	}
 
 	/**
@@ -98,6 +115,11 @@ public class DaoWapper<T, ID> {
 	// public int delete(){}
 	public void insert(T data) throws SQLException {
 		dao.create(data);
+		@SuppressWarnings("unchecked")
+		DataBaseListener<T> l = DataHelpeFactory.getListeners().get(type);
+		if (l != null) {
+			l.onDataInserted(data);
+		}
 	}
 
 	/**
@@ -108,6 +130,12 @@ public class DaoWapper<T, ID> {
 	 */
 	public void update(T data) throws SQLException {
 		dao.update(data);
+
+		@SuppressWarnings("unchecked")
+		DataBaseListener<T> l = DataHelpeFactory.getListeners().get(type);
+		if (l != null) {
+			l.onDataUpdated(data);
+		}
 	}
 
 	/**
@@ -117,5 +145,12 @@ public class DaoWapper<T, ID> {
 	 */
 	public void clear() throws SQLException {
 		dao.deleteBuilder().delete();
+
+		@SuppressWarnings("unchecked")
+		DataBaseListener<T> l = DataHelpeFactory.getListeners().get(type);
+		if (l != null) {
+			l.onDataCleared();
+		}
 	}
+
 }

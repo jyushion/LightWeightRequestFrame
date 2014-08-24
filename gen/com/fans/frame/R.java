@@ -192,7 +192,7 @@ public final class R {
         public static int Button=0x7f09000f;
         public static int DividerHorizontal=0x7f090012;
         public static int DividerVertical=0x7f090013;
-        /**  Default Summary Text Style 
+        /**  Default EditText Text Style 
          */
         public static int EditText=0x7f090010;
         public static int GreenButton=0x7f090011;
