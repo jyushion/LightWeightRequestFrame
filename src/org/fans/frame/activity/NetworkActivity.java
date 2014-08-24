@@ -4,11 +4,14 @@ import org.fans.frame.api.executor.DialogTaskExecutor;
 import org.fans.frame.api.executor.DialogTaskExecutor.TaskResultPicker;
 import org.fans.frame.api.packet.ApiRequest;
 import org.fans.frame.api.packet.ApiResponse;
+import org.fans.frame.utils.NetworkUtil;
+import org.fans.frame.utils.ToastMaster;
 import org.fans.frame.utils.Utils;
 
 import android.os.Bundle;
 
 import com.android.volley.VolleyError;
+import com.fans.frame.R;
 
 public class NetworkActivity extends BaseActivity implements TaskResultPicker {
 
@@ -73,6 +76,14 @@ public class NetworkActivity extends BaseActivity implements TaskResultPicker {
 	 * @param error
 	 */
 	public void onRequestFailed(ApiRequest request, String reason, VolleyError error) {
+		toastWithDefault();
+	}
+	protected void toastWithDefault() {
+		if(!NetworkUtil.isNetworkAvailable(this)){
+			ToastMaster.popToast(this, R.string.network_unavailable);
+		}else{
+			ToastMaster.popToast(this, R.string.request_failed);
+		}
 	}
 
 	@Override

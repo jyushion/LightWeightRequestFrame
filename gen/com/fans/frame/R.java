@@ -147,7 +147,9 @@ public final class R {
         /**  loading 
          */
         public static int loading_more=0x7f080003;
+        public static int network_unavailable=0x7f080008;
         public static int no_data=0x7f080006;
+        public static int request_failed=0x7f080009;
     }
     public static final class style {
         /**  Acvity 伪造dialog 
